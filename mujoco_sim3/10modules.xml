@@ -1,0 +1,596 @@
+<mujoco model="10modules">
+  <!-- ensure radians, point to correct mesh folder -->
+  <compiler angle="radian" meshdir="2modules/meshes"/>
+
+  <!-- smaller timestep ok, more iters + tighter tol -->
+  <option timestep="0.001"
+          solver="Newton"
+          iterations="100"
+          tolerance="1e-8"/>
+
+  <asset>
+    <mesh name="piece0"      file="base_piece.STL"/>
+    <mesh name="arm1"        file="arm1.STL"/>
+    <mesh name="piece1"      file="piece1.STL"/>
+    <mesh name="connector1"  file="connector.STL"/>
+    <mesh name="piece2"      file="piece2.STL"/>
+    <mesh name="arm2"        file="arm2.STL"/>
+    <mesh name="piece3"      file="piece3.STL"/>
+    <mesh name="connector2"  file="connector.STL"/>
+    <mesh name="piece4"      file="piece2.STL"/>
+    <mesh name="arm3"        file="arm2.STL"/>
+    <mesh name="piece5"      file="piece3.STL"/>
+    <mesh name="connector3"  file="connector.STL"/>
+    <mesh name="piece6"      file="piece2.STL"/>
+    <mesh name="arm4"        file="arm2.STL"/>
+    <mesh name="piece7"      file="piece3.STL"/>
+    <mesh name="connector4"  file="connector.STL"/>
+    <mesh name="piece8"      file="piece2.STL"/>
+    <mesh name="arm5"        file="arm2.STL"/>
+    <mesh name="piece9"      file="piece3.STL"/>
+    <mesh name="connector5"  file="connector.STL"/>
+    <mesh name="piece10"     file="piece2.STL"/>
+    <mesh name="arm6"        file="arm2.STL"/>
+    <mesh name="piece11"     file="piece3.STL"/>
+    <mesh name="connector6"  file="connector.STL"/>
+    <mesh name="piece12"     file="piece2.STL"/>
+    <mesh name="arm7"        file="arm2.STL"/>
+    <mesh name="piece13"     file="piece3.STL"/>
+    <mesh name="connector7"  file="connector.STL"/>
+    <mesh name="piece14"     file="piece2.STL"/>
+    <mesh name="arm8"        file="arm2.STL"/>
+    <mesh name="piece15"     file="piece3.STL"/>
+    <mesh name="connector8"  file="connector.STL"/>
+    <mesh name="piece16"     file="piece2.STL"/>
+    <mesh name="arm9"        file="arm2.STL"/>
+    <mesh name="piece17"     file="piece3.STL"/>
+    <mesh name="connector9"  file="connector.STL"/>
+    <mesh name="piece18"     file="piece2.STL"/>
+    <mesh name="arm10"       file="arm2.STL"/>
+    <mesh name="piece19"     file="piece3.STL"/>
+
+    <texture name="grid" type="2d" builtin="checker"
+             width="512" height="512"
+             rgb1="0.9 0.9 0.9" rgb2="0.6 0.6 0.6"/>
+    <material name="grid_mat"      texture="grid" texrepeat="100 100" reflectance="0.2"/>
+    <material name="blue"          rgba="0 0 1 0.4"/>
+    <material name="red"           rgba="1 0 0 1"/>
+    <material name="green"         rgba="0 1 0 0.4"/>
+    <material name="gray"          rgba="0.26275 0.25098 0.23922 0.5"/>
+    <material name="translucent"   rgba="1 1 1 0"/>
+    <material name="magnet_color"  rgba="1 0 0 1" emission="1"/>
+  </asset>
+
+  <worldbody>
+    <geom name="ground" type="plane" pos="0 0 0" size="20 20 0.1"
+          material="grid_mat" contype="1" conaffinity="1"
+          friction="1.0 0.1 0.005"/>
+
+    <body name="piece0" pos="0 0 0">
+      <freejoint name="free_base1"/>
+      <inertial pos="0.0010345 0.005326 0.010966" mass="0.185"
+                fullinertia="4.7155E-05 4.6452E-05 8.9367E-05 1.4654E-07 -5.4158E-08 4.434E-08"/>
+      <geom name="piece0_geom" type="mesh" mesh="piece0" material="gray" contype="1" conaffinity="1"/>
+
+      <body name="ball_1" pos="0 -0.0676025 0.011">
+        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+      </body>
+
+      <body name="ball_2" pos="-0.0585455 0.0338013 0.011">
+        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+      </body>
+
+      <body name="ball_3" pos="0.0585455 0.0338013 0.011">
+        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+      </body>
+
+      <!-- ======== Module 1 ======== -->
+      <body name="arm1" pos="0 0.033775 0.011" euler="1.5708 1.5712 0">
+        <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                  fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+        <geom name="arm1_geom" type="mesh" mesh="arm1" material="gray" contype="1" conaffinity="1"/>
+        <joint name="joint1" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+        <body name="piece1" pos="0.020005 0 0">
+          <inertial pos="0.03453 -0.00020927 -0.00012664" mass="0.1075"
+                    fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.442E-08 -3.1795E-07 -2.9297E-09"/>
+          <geom name="piece1_geom" type="mesh" mesh="piece1" material="gray" contype="1" conaffinity="1"/>
+          <joint name="joint2" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+          <body name="ball_4" pos="0.1014332 0 0">
+                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+        </body>
+
+          <body name="ball_5" pos="0 0 -0.058548">
+            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+          </body>
+
+          <body name="ball_6" pos="0 0 0.058548">
+            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+          </body>
+
+          <body name="connector1" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+            <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                      fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+            <geom name="connector1_geom" type="mesh" mesh="connector1" material="translucent" contype="1" conaffinity="1"/>
+            <joint name="connect_joint1" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+            <!-- ======== Module 2 ======== -->
+            <body name="piece2" pos="0.019 0 0">
+              <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                        fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+              <geom name="piece2_geom" type="mesh" mesh="piece2" material="gray" contype="1" conaffinity="1"/>
+              <joint name="connect_joint2" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+              <body name="ball_7" pos="0 0 -0.058548">
+                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+              </body>
+
+              <body name="ball_8" pos="0 0 0.058548">
+                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+              </body>
+
+              <body name="ball_9" pos="0.1014332 0 0">
+                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+              </body>
+
+              <body name="arm2" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                          fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                <geom name="arm2_geom" type="mesh" mesh="arm2" material="gray" contype="1" conaffinity="1"/>
+                <joint name="joint3" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                <body name="piece3" pos="0.020005 0 0">
+                  <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                            fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                  <geom name="piece3_geom" type="mesh" mesh="piece3" material="gray" contype="1" conaffinity="1"/>
+                  <joint name="joint4" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                  <body name="ball_10" pos="0.1014332 0 0">
+                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                  </body>
+                  <body name="ball_11" pos="0 0 -0.058548">
+                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                  </body>
+                  <body name="ball_12" pos="0 0 0.058548">
+                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                  </body>  
+
+                  <body name="connector2" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                    <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                              fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                    <geom name="connector2_geom" type="mesh" mesh="connector2" material="translucent" contype="1" conaffinity="1"/>
+                    <joint name="connect_joint3" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                    <!-- ======== Module 3 ======== -->
+                    <body name="piece4" pos="0.019 0 0">
+                      <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                      <geom name="piece4_geom" type="mesh" mesh="piece4" material="gray" contype="1" conaffinity="1"/>
+                      <joint name="connect_joint4" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                      <body name="ball_13" pos="0 0 -0.058548">
+                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                      </body>
+
+                      <body name="ball_14" pos="0 0 0.058548">
+                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                      </body>
+
+                      <body name="ball_15" pos="0.1014332 0 0">
+                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                      </body>
+
+                      <body name="arm3" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                        <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                  fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                        <geom name="arm3_geom" type="mesh" mesh="arm3" material="gray" contype="1" conaffinity="1"/>
+                        <joint name="joint5" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                        <body name="piece5" pos="0.020005 0 0">
+                          <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                    fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                          <geom name="piece5_geom" type="mesh" mesh="piece5" material="gray" contype="1" conaffinity="1"/>
+                          <joint name="joint6" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                          <body name="ball_16" pos="0.1014332 0 0">
+                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                          </body>
+                          <body name="ball_17" pos="0 0 -0.058548">
+                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                          </body>
+                          <body name="ball_18" pos="0 0 0.058548">
+                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                          </body>  
+
+                          <body name="connector3" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                            <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                                      fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                            <geom name="connector3_geom" type="mesh" mesh="connector3" material="translucent" contype="1" conaffinity="1"/>
+                            <joint name="connect_joint5" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                            <!-- ======== Module 4 ======== -->
+                            <body name="piece6" pos="0.019 0 0">
+                              <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                        fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                              <geom name="piece6_geom" type="mesh" mesh="piece6" material="gray" contype="1" conaffinity="1"/>
+                              <joint name="connect_joint6" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+                              <body name="ball_19" pos="0 0 -0.058548">
+                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                              </body>
+
+                              <body name="ball_20" pos="0 0 0.058548">
+                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                              </body>
+
+                              <body name="ball_21" pos="0.1014332 0 0">
+                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                              </body>
+
+                              <body name="arm4" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                                <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                          fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                                <geom name="arm4_geom" type="mesh" mesh="arm4" material="gray" contype="1" conaffinity="1"/>
+                                <joint name="joint7" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                <body name="piece7" pos="0.020005 0 0">
+                                  <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                            fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                                  <geom name="piece7_geom" type="mesh" mesh="piece7" material="gray" contype="1" conaffinity="1"/>
+                                  <joint name="joint8" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                  <body name="ball_22" pos="0.1014332 0 0">
+                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                  </body>
+                                  <body name="ball_23" pos="0 0 -0.058548">
+                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                  </body>
+                                  <body name="ball_24" pos="0 0 0.058548">
+                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                  </body>  
+
+                                  <body name="connector4" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                                    <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                                              fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                                    <geom name="connector4_geom" type="mesh" mesh="connector4" material="translucent" contype="1" conaffinity="1"/>
+                                    <joint name="connect_joint7" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                                    <!-- ======== Module 5 ======== -->
+                                    <body name="piece8" pos="0.019 0 0">
+                                      <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                                fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                                      <geom name="piece8_geom" type="mesh" mesh="piece8" material="gray" contype="1" conaffinity="1"/>
+                                      <joint name="connect_joint8" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+                                      <body name="ball_25" pos="0 0 -0.058548">
+                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                      </body>
+                                      <body name="ball_26" pos="0 0 0.058548">
+                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                      </body>
+                                      <body name="ball_27" pos="0.1014332 0 0">
+                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                      </body>
+
+                                      <body name="arm5" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                                        <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                                  fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                                        <geom name="arm5_geom" type="mesh" mesh="arm5" material="gray" contype="1" conaffinity="1"/>
+                                        <joint name="joint9" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                        <body name="piece9" pos="0.020005 0 0">
+                                          <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                                    fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                                          <geom name="piece9_geom" type="mesh" mesh="piece9" material="gray" contype="1" conaffinity="1"/>
+                                          <joint name="joint10" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+                                          <body name="ball_28" pos="0.1014332 0 0">
+                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                          </body>
+                                          <body name="ball_29" pos="0 0 -0.058548">
+                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                          </body>
+                                          <body name="ball_30" pos="0 0 0.058548">
+                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                          </body>  
+
+                                          <body name="connector5" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                                            <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                                                      fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                                            <geom name="connector5_geom" type="mesh" mesh="connector5" material="translucent" contype="1" conaffinity="1"/>
+                                            <joint name="connect_joint9" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                                            <!-- ======== Module 6 ======== -->
+                                            <body name="piece10" pos="0.019 0 0">
+                                              <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                                        fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                                              <geom name="piece10_geom" type="mesh" mesh="piece10" material="gray" contype="1" conaffinity="1"/>
+                                              <joint name="connect_joint10" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+                                              <body name="ball_31" pos="0 0 -0.058548">
+                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                              </body>
+                                              <body name="ball_32" pos="0 0 0.058548">
+                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                              </body>
+                                              <body name="ball_33" pos="0.1014332 0 0">
+                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                              </body>
+
+                                              <body name="arm6" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                                                <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                                          fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                                                <geom name="arm6_geom" type="mesh" mesh="arm6" material="gray" contype="1" conaffinity="1"/>
+                                                <joint name="joint11" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                                <body name="piece11" pos="0.020005 0 0">
+                                                  <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                                            fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                                                  <geom name="piece11_geom" type="mesh" mesh="piece11" material="gray" contype="1" conaffinity="1"/>
+                                                  <joint name="joint12" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+                                                  <body name="ball_34" pos="0.1014332 0 0">
+                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                  </body>
+                                                  <body name="ball_35" pos="0 0 -0.058548">
+                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                  </body>
+                                                  <body name="ball_36" pos="0 0 0.058548">
+                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                  </body> 
+
+                                                  <body name="connector6" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                                                    <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                                                              fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                                                    <geom name="connector6_geom" type="mesh" mesh="connector6" material="translucent" contype="1" conaffinity="1"/>
+                                                    <joint name="connect_joint11" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                                                    <!-- ======== Module 7 ======== -->
+                                                    <body name="piece12" pos="0.019 0 0">
+                                                      <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                                                fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                                                      <geom name="piece12_geom" type="mesh" mesh="piece12" material="gray" contype="1" conaffinity="1"/>
+                                                      <joint name="connect_joint12" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+                                                      <body name="ball_37" pos="0 0 -0.058548">
+                                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                      </body>
+                                                      <body name="ball_38" pos="0 0 0.058548">
+                                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                      </body>
+                                                      <body name="ball_39" pos="0.1014332 0 0">
+                                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                      </body>
+
+                                                      <body name="arm7" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                                                        <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                                                  fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                                                        <geom name="arm7_geom" type="mesh" mesh="arm7" material="gray" contype="1" conaffinity="1"/>
+                                                        <joint name="joint13" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                                        <body name="piece13" pos="0.020005 0 0">
+                                                          <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                                                    fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                                                          <geom name="piece13_geom" type="mesh" mesh="piece13" material="gray" contype="1" conaffinity="1"/>
+                                                          <joint name="joint14" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+                                                          <body name="ball_40" pos="0.1014332 0 0">
+                                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                          </body>
+                                                          <body name="ball_41" pos="0 0 -0.058548">
+                                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                          </body>
+                                                          <body name="ball_42" pos="0 0 0.058548">
+                                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                          </body> 
+
+                                                          <body name="connector7" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                                                            <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                                                                      fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                                                            <geom name="connector7_geom" type="mesh" mesh="connector7" material="translucent" contype="1" conaffinity="1"/>
+                                                            <joint name="connect_joint13" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                                                            <!-- ======== Module 8 ======== -->
+                                                            <body name="piece14" pos="0.019 0 0">
+                                                              <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                                                        fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                                                              <geom name="piece14_geom" type="mesh" mesh="piece14" material="gray" contype="1" conaffinity="1"/>
+                                                              <joint name="connect_joint14" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+                                                              <body name="ball_43" pos="0 0 -0.058548">
+                                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                              </body>
+                                                              <body name="ball_44" pos="0 0 0.058548">
+                                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                              </body>
+                                                              <body name="ball_45" pos="0.1014332 0 0">
+                                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                              </body>
+
+                                                              <body name="arm8" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                                                                <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                                                          fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                                                                <geom name="arm8_geom" type="mesh" mesh="arm8" material="gray" contype="1" conaffinity="1"/>
+                                                                <joint name="joint15" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                                                <body name="piece15" pos="0.020005 0 0">
+                                                                  <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                                                            fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                                                                  <geom name="piece15_geom" type="mesh" mesh="piece15" material="gray" contype="1" conaffinity="1"/>
+                                                                  <joint name="joint16" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+                                                                  <body name="ball_46" pos="0.1014332 0 0">
+                                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                  </body>
+                                                                  <body name="ball_47" pos="0 0 -0.058548">
+                                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                  </body>
+                                                                  <body name="ball_48" pos="0 0 0.058548">
+                                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                  </body> 
+
+                                                                  <body name="connector8" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                                                                    <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                                                                              fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                                                                    <geom name="connector8_geom" type="mesh" mesh="connector8" material="translucent" contype="1" conaffinity="1"/>
+                                                                    <joint name="connect_joint15" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                                                                    <!-- ======== Module 9 ======== -->
+                                                                    <body name="piece16" pos="0.019 0 0">
+                                                                      <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                                                                fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                                                                      <geom name="piece16_geom" type="mesh" mesh="piece16" material="gray" contype="1" conaffinity="1"/>
+                                                                      <joint name="connect_joint16" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+                                                                      <body name="ball_49" pos="0 0 -0.058548">
+                                                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                      </body>
+                                                                      <body name="ball_50" pos="0 0 0.058548">
+                                                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                      </body>
+                                                                      <body name="ball_51" pos="0.1014332 0 0">
+                                                                        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                      </body>
+
+                                                                      <body name="arm9" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                                                                        <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                                                                  fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                                                                        <geom name="arm9_geom" type="mesh" mesh="arm9" material="gray" contype="1" conaffinity="1"/>
+                                                                        <joint name="joint17" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                                                        <body name="piece17" pos="0.020005 0 0">
+                                                                          <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                                                                    fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                                                                          <geom name="piece17_geom" type="mesh" mesh="piece17" material="gray" contype="1" conaffinity="1"/>
+                                                                          <joint name="joint18" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+                                                                          <body name="ball_52" pos="0.1014332 0 0">
+                                                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                          </body>
+                                                                          <body name="ball_53" pos="0 0 -0.058548">
+                                                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                          </body>
+                                                                          <body name="ball_54" pos="0 0 0.058548">
+                                                                            <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                          </body> 
+
+                                                                          <body name="connector9" pos="0.05071 0 0.029295" euler="0 -1.0476 0">
+                                                                            <inertial pos="0.0095 9.2482E-14 0.058546" mass="0.00001"
+                                                                                      fullinertia="3.7274E-07 9.8046E-07 9.8046E-07 -5.9232E-18 1.3159E-13 -2.255E-23"/>
+                                                                            <geom name="connector9_geom" type="mesh" mesh="connector9" material="translucent" contype="1" conaffinity="1"/>
+                                                                            <joint name="connect_joint17" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                                                                            <!-- ======== Module 10 ======== -->
+                                                                            <body name="piece18" pos="0.019 0 0">
+                                                                              <inertial pos="0.03736 -3.3609E-05 -0.0040952" mass="0.185"
+                                                                                        fullinertia="4.7106E-05 8.9367E-05 4.6501E-05 -2.4733E-08 2.3093E-07 -6.5479E-08"/>
+                                                                              <geom name="piece18_geom" type="mesh" mesh="piece18" material="gray" contype="1" conaffinity="1"/>
+                                                                              <joint name="connect_joint18" type="hinge" axis="0 0 1" range="-1.57 1.57"/>
+
+                                                                              <body name="ball_55" pos="0.1014332 0 0">
+                                                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                              </body>
+                                                                              <body name="ball_56" pos="0 0 -0.058548">
+                                                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                              </body>
+                                                                              <body name="ball_57" pos="0 0 0.058548">
+                                                                                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                              </body> 
+
+                                                                              <body name="arm10" pos="0.050689 0 -0.02925" euler="0 1.0476 0">
+                                                                                <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                                                                                          fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+                                                                                <geom name="arm10_geom" type="mesh" mesh="arm10" material="gray" contype="1" conaffinity="1"/>
+                                                                                <joint name="joint19" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+                                                                                <body name="piece19" pos="0.020005 0 0">
+                                                                                  <inertial pos="0.03453 -0.00020927 -0.00012663" mass="0.1075"
+                                                                                            fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.4421E-08 -3.1795E-07 -2.932E-09"/>
+                                                                                  <geom name="piece19_geom" type="mesh" mesh="piece19" material="gray" contype="1" conaffinity="1"/>
+                                                                                  <joint name="joint20" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+                                                                                  <body name="ball_58" pos="0.1014332 0 0">
+                                                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                                  </body>
+                                                                                  <body name="ball_59" pos="0 0 -0.058548">
+                                                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                                  </body>
+                                                                                  <body name="ball_60" pos="0 0 0.058548">
+                                                                                    <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+                                                                                  </body> 
+                                                                                </body>
+                                                                              </body>
+                                                                            </body>
+                                                                          </body>
+                                                                        </body>
+                                                                      </body>
+                                                                    </body>
+                                                                  </body>
+                                                                </body>
+                                                              </body>
+                                                            </body>
+                                                          </body>
+                                                        </body>
+                                                      </body>
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <!-- ======================================================
+       All equality constraints consolidated in one block
+       Pattern: joint(2N-1) coupled to joint(2N) for each module
+       ====================================================== -->
+  <equality>
+    <joint name="active 1" joint1="joint1"  joint2="joint2"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 2" joint1="joint3"  joint2="joint4"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 3" joint1="joint5"  joint2="joint6"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 4" joint1="joint7"  joint2="joint8"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 5" joint1="joint9"  joint2="joint10" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 6" joint1="joint11" joint2="joint12" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 7" joint1="joint13" joint2="joint14" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 8" joint1="joint15" joint2="joint16" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 9" joint1="joint17" joint2="joint18" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="active 10" joint1="joint19" joint2="joint20" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+
+    <joint name="passive 1" joint1="connect_joint1"  joint2="connect_joint2"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 2" joint1="connect_joint3"  joint2="connect_joint4"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 3" joint1="connect_joint5"  joint2="connect_joint6"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 4" joint1="connect_joint7"  joint2="connect_joint8"  polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 5" joint1="connect_joint9"  joint2="connect_joint10" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 6" joint1="connect_joint11" joint2="connect_joint12" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 7" joint1="connect_joint13" joint2="connect_joint14" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 8" joint1="connect_joint15" joint2="connect_joint16" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+    <joint name="passive 9" joint1="connect_joint17" joint2="connect_joint18" polycoef="0 1 0 0 0" solref="0.01 0.5" solimp="0.99 0.999 0.0001"/>
+
+  </equality>
+
+  <!-- ======================================================
+       All actuators consolidated in one block
+       One position actuator per module, drives the odd joint
+       ====================================================== -->
+  <actuator>
+    <position name="joint1_motor"  joint="joint1"  gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint2_motor"  joint="joint3"  gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint3_motor"  joint="joint5"  gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint4_motor"  joint="joint7"  gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint5_motor"  joint="joint9"  gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint6_motor"  joint="joint11" gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint7_motor"  joint="joint13" gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint8_motor"  joint="joint15" gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint9_motor"  joint="joint17" gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+    <position name="joint10_motor" joint="joint19" gear="1" forcerange="-2.16 2.16" ctrlrange="-1.57 1.57"/>
+  </actuator>
+
+</mujoco>

@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="3modules">
+  <link
+    name="base_piece">
+    <inertial>
+      <origin
+        xyz="0.0010345 0.005326 0.010966"
+        rpy="0 0 0" />
+      <mass
+        value="0.080978" />
+      <inertia
+        ixx="4.7155E-05"
+        ixy="1.4654E-07"
+        ixz="-5.4158E-08"
+        iyy="4.6452E-05"
+        iyz="4.434E-08"
+        izz="8.9367E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/base_piece.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/base_piece.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="0.0087368 9.3905E-07 -0.0054744"
+        rpy="0 0 0" />
+      <mass
+        value="0.0023104" />
+      <inertia
+        ixx="1.8096E-08"
+        ixy="-1.7121E-12"
+        ixz="4.7185E-09"
+        iyy="1.3363E-07"
+        iyz="2.3371E-12"
+        izz="1.4184E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="revolute">
+    <origin
+      xyz="0 0.033775 0.011"
+      rpy="1.5708 0 1.5712" />
+    <parent
+      link="base_piece" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="piece1">
+    <inertial>
+      <origin
+        xyz="0.03453 -0.00020927 -0.00012664"
+        rpy="0 0 0" />
+      <mass
+        value="0.059891" />
+      <inertia
+        ixx="4.5118E-05"
+        ixy="-2.442E-08"
+        ixz="-3.1795E-07"
+        iyy="8.4255E-05"
+        iyz="-2.9297E-09"
+        izz="4.26E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.26275 0.25098 0.23922 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint2"
+    type="revolute">
+    <origin
+      xyz="0.020005 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="link1" />
+    <child
+      link="piece1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="connector1">
+    <inertial>
+      <origin
+        xyz="0.0095 -4.3299E-15 0.058546"
+        rpy="0 0 0" />
+      <mass
+        value="0.0089784" />
+      <inertia
+        ixx="3.7274E-07"
+        ixy="1.6736E-20"
+        ixz="9.0765E-14"
+        iyy="9.8046E-07"
+        iyz="-2.8944E-23"
+        izz="9.8046E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/connector1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/connector1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="connector_joint1"
+    type="revolute">
+    <origin
+      xyz="0.05071 0 0.029295"
+      rpy="0 -1.0476 0" />
+    <parent
+      link="piece1" />
+    <child
+      link="connector1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="piece2">
+    <inertial>
+      <origin
+        xyz="0.03736 -3.3609E-05 -0.0040952"
+        rpy="0 0 0" />
+      <mass
+        value="0.080978" />
+      <inertia
+        ixx="4.7106E-05"
+        ixy="-2.4733E-08"
+        ixz="2.3093E-07"
+        iyy="8.9367E-05"
+        iyz="-6.5479E-08"
+        izz="4.6501E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="connector_joint2"
+    type="revolute">
+    <origin
+      xyz="0.019 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="connector1" />
+    <child
+      link="piece2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link2">
+    <inertial>
+      <origin
+        xyz="0.0087368 9.3905E-07 -0.0054744"
+        rpy="0 0 0" />
+      <mass
+        value="0.0023104" />
+      <inertia
+        ixx="1.8096E-08"
+        ixy="-1.7121E-12"
+        ixz="4.7185E-09"
+        iyy="1.3363E-07"
+        iyz="2.3371E-12"
+        izz="1.4184E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint3"
+    type="revolute">
+    <origin
+      xyz="0.050689 0 -0.02925"
+      rpy="0 1.0476 0" />
+    <parent
+      link="piece2" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="piece3">
+    <inertial>
+      <origin
+        xyz="0.03453 -0.00020927 -0.00012663"
+        rpy="0 0 0" />
+      <mass
+        value="0.059891" />
+      <inertia
+        ixx="4.5118E-05"
+        ixy="-2.4421E-08"
+        ixz="-3.1795E-07"
+        iyy="8.4255E-05"
+        iyz="-2.932E-09"
+        izz="4.26E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.26275 0.25098 0.23922 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint4"
+    type="revolute">
+    <origin
+      xyz="0.020005 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="link2" />
+    <child
+      link="piece3" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="connector2">
+    <inertial>
+      <origin
+        xyz="0.0095 2.2204E-16 0.058546"
+        rpy="0 0 0" />
+      <mass
+        value="0.0089784" />
+      <inertia
+        ixx="3.7274E-07"
+        ixy="-9.1102E-21"
+        ixz="3.2326E-13"
+        iyy="9.8046E-07"
+        iyz="2.4825E-24"
+        izz="9.8046E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/connector2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/connector2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="connector_joint3"
+    type="revolute">
+    <origin
+      xyz="0.05071 0 0.029295"
+      rpy="0 -1.0476 0" />
+    <parent
+      link="piece3" />
+    <child
+      link="connector2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="piece4">
+    <inertial>
+      <origin
+        xyz="0.03736 -3.3609E-05 -0.0040952"
+        rpy="0 0 0" />
+      <mass
+        value="0.080978" />
+      <inertia
+        ixx="4.7106E-05"
+        ixy="-2.4729E-08"
+        ixz="2.3094E-07"
+        iyy="8.9367E-05"
+        iyz="-6.5478E-08"
+        izz="4.6501E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="connector_joint4"
+    type="revolute">
+    <origin
+      xyz="0.019 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="connector2" />
+    <child
+      link="piece4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link3">
+    <inertial>
+      <origin
+        xyz="0.0087368 9.3905E-07 -0.0054744"
+        rpy="0 0 0" />
+      <mass
+        value="0.0023104" />
+      <inertia
+        ixx="1.8096E-08"
+        ixy="-1.7121E-12"
+        ixz="4.7185E-09"
+        iyy="1.3363E-07"
+        iyz="2.3371E-12"
+        izz="1.4184E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint5"
+    type="revolute">
+    <origin
+      xyz="0.050689 0 -0.02925"
+      rpy="0 1.0476 0" />
+    <parent
+      link="piece4" />
+    <child
+      link="link3" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="piece5">
+    <inertial>
+      <origin
+        xyz="0.03453 -0.00020927 -0.00012664"
+        rpy="0 0 0" />
+      <mass
+        value="0.059891" />
+      <inertia
+        ixx="4.5118E-05"
+        ixy="-2.442E-08"
+        ixz="-3.1795E-07"
+        iyy="8.4255E-05"
+        iyz="-2.9295E-09"
+        izz="4.26E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.26275 0.25098 0.23922 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://3modules/meshes/piece5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint6"
+    type="revolute">
+    <origin
+      xyz="0.020005 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="link3" />
+    <child
+      link="piece5" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>

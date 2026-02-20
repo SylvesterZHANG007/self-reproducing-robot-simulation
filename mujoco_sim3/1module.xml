@@ -1,0 +1,105 @@
+
+<mujoco model="1module">
+  <!-- ensure radians, point to correct mesh folder -->
+  <compiler angle="radian" meshdir="2modules/meshes"/>
+
+  <!-- smaller timestep ok, more iters + tighter tol -->
+  <option timestep="0.001"
+          solver="Newton"
+          iterations="100"
+          tolerance="1e-8"/>
+
+  <asset>
+    <mesh name="piece0"   file="base_piece.STL"/>
+    <mesh name="arm1" file="arm1.STL"/>
+    <mesh name="piece1"   file="piece1.STL"/>
+
+    <texture name="grid" type="2d" builtin="checker"
+             width="512" height="512"
+             rgb1="0.9 0.9 0.9" rgb2="0.6 0.6 0.6"/>
+    <material name="grid_mat" texture="grid"
+              texrepeat="100 100" reflectance="0.2"/>
+    <material name="blue"  rgba="0 0 1 0.4"/>
+    <material name="red"   rgba="1 0 0 1"/>
+    <material name="green" rgba="0 1 0 0.4"/>
+    <material name = "gray"  rgba = "0.26275 0.25098 0.23922 0.5"/>
+    <material name="translucent" rgba="1 1 1 0"/>
+    <material name="magnet_color" rgba="1 0 0 1" emission="1"/>
+  </asset>
+
+  <worldbody>
+    <!-- ground plane with collision enabled -->
+    <geom name="ground"
+          type="plane"
+          pos="0 0 0"
+          size="20 20 0.1"
+          material="grid_mat"
+          contype="1"
+          conaffinity="1"
+          friction="1.0 0.1 0.005"/>
+
+    <body name="piece0" pos="0 0 0 ">
+      <freejoint name="free_base1"/>
+      <inertial pos="0.0010345 0.005326 0.010966" mass="0.185"
+                fullinertia="4.7155E-05 4.6452E-05 8.9367E-05 1.4654E-07 -5.4158E-08 4.434E-08"/>
+      <geom name="piece0_geom" type="mesh" mesh="piece0" material="gray" contype="1" conaffinity="1"/>
+
+      <body name="ball_1" pos="0 -0.0676025 0.011">
+        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+      </body>
+
+      <body name="ball_2" pos="-0.0585455 0.0338013 0.011">
+        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+      </body>
+
+      <body name="ball_3" pos="0.0585455 0.0338013 0.011">
+        <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+      </body>
+
+      <body name="arm1" pos="0 0.033775 0.011" euler="1.5708 1.5712 0">
+          <inertial pos="0.0087368 9.3905E-07 -0.0054744" mass="0.004"
+                    fullinertia="1.8096E-08 1.3363E-07 1.4184E-07 -1.7121E-12 4.7185E-09 2.3371E-12"/>
+          <geom name="arm1_geom" type="mesh" mesh="arm1" material="gray" contype="1" conaffinity="1"/>
+
+          <joint name="joint1" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+          <body name="piece1" pos="0.020005 0 0">
+              <inertial pos="0.03453 -0.00020927 -0.00012664" mass="0.1075"
+                        fullinertia="4.5118E-05 8.4255E-05 4.26E-05 -2.442E-08 -3.1795E-07 -2.9297E-09"/>
+              <geom name="piece1_geom" type="mesh" mesh="piece1" material="gray" contype="1" conaffinity="1"/>
+
+              <joint name="joint2" type="hinge" axis="0 0 -1" range="-1.57 1.57"/>
+
+              <body name="ball_4" pos="0.1014332 0 0">
+                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+              </body>
+              <body name="ball_5" pos="0 0 -0.058548">
+                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+              </body>
+              <body name="ball_6" pos="0 0 0.058548">
+                <geom type="sphere" size="0.006" mass="0.00001" material="magnet_color" contype="0" conaffinity="0"/>
+              </body>  
+
+
+          </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <equality>
+    <joint joint1="joint1" joint2="joint2"
+           polycoef="0 1 0 0 0"
+           solref="0.01 0.5"
+           solimp="0.99 0.999 0.0001"/>
+  </equality>
+
+  <actuator>
+    <position name="joint1_motor"
+              joint="joint1"
+              gear="1"
+              forcerange="-2.16 2.16"
+              ctrlrange="-1.57 1.57"/>
+    <!-- you can add joint2 actuator similarly -->
+  </actuator>
+
+</mujoco>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="module_sim1">
+  <link
+    name="base_piece">
+    <inertial>
+      <origin
+        xyz="-0.005326 0.0010345 0.0094664"
+        rpy="0 0 0" />
+      <mass
+        value="0.185" />
+      <inertia
+        ixx="4.6452E-05"
+        ixy="-1.4654E-07"
+        ixz="-4.434E-08"
+        iyy="4.7155E-05"
+        iyz="-5.4158E-08"
+        izz="8.9367E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://module_sim1/meshes/base_piece.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://module_sim1/meshes/base_piece.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="servo_arm">
+    <inertial>
+      <origin
+        xyz="-0.0087084 9.3905E-07 0.0054783"
+        rpy="0 0 0" />
+      <mass
+        value="0.004" />
+      <inertia
+        ixx="1.8101E-08"
+        ixy="1.7111E-12"
+        ixz="4.7734E-09"
+        iyy="1.3363E-07"
+        iyz="-2.3379E-12"
+        izz="1.4183E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://module_sim1/meshes/servo_arm.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://module_sim1/meshes/servo_arm.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="revolute">
+    <origin
+      xyz="-0.033801 0 0.0095"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_piece" />
+    <child
+      link="servo_arm" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="1"
+      velocity="2.2" />
+  </joint>
+  <link
+    name="new_piece">
+    <inertial>
+      <origin
+        xyz="-0.034489 -0.00020927 0.00012666"
+        rpy="0 0 0" />
+      <mass
+        value="0.1075" />
+      <inertia
+        ixx="4.5118E-05"
+        ixy="2.442E-08"
+        ixz="-3.1795E-07"
+        iyy="8.4255E-05"
+        iyz="2.9297E-09"
+        izz="4.26E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://module_sim1/meshes/new_piece.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.26275 0.25098 0.23922 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://module_sim1/meshes/new_piece.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint2"
+    type="revolute">
+    <origin
+      xyz="-0.020021 0 0"
+      rpy="0 0.00044346 0" />
+    <parent
+      link="servo_arm" />
+    <child
+      link="new_piece" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="1"
+      velocity="2.2" />
+  </joint>
+</robot>
